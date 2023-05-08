@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Calculator</title>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body class="h-screen">
+    <div class="calculator-container">
+        <div class="calculator">
+        <div class="bg-gray-800 p-4 rounded-lg shadow-md">
+            <input class="text-right w-full p-2 rounded-lg mb-2" type="text" id="output" disabled>
+            <div class="grid grid-cols-4 gap-2">
+                <button class="btn" onclick="clearOutput()">AC</button>
+                <button class="btn" onclick="deleteLastCharacter()">DEL</button>
+                <button class="btn" onclick="appendToOutput('%')">%</button>
+                <button class="btn" onclick="appendToOutput('/')">/</button>
+                <button class="btn" onclick="appendToOutput('7')">7</button>
+                <button class="btn" onclick="appendToOutput('8')">8</button>
+                <button class="btn" onclick="appendToOutput('9')">9</button>
+                <button class="btn" onclick="appendToOutput('*')">*</button>
+                <button class="btn" onclick="appendToOutput('4')">4</button>
+                <button class="btn" onclick="appendToOutput('5')">5</button>
+                <button class="btn" onclick="appendToOutput('6')">6</button>
+                <button class="btn" onclick="appendToOutput('-')">-</button>
+                <button class="btn" onclick="appendToOutput('1')">1</button>
+                <button class="btn" onclick="appendToOutput('2')">2</button>
+                <button class="btn" onclick="appendToOutput('3')">3</button>
+                <button class="btn" onclick="appendToOutput('+')">+</button>
+                <button class="btn col-span-2" onclick="appendToOutput('0')">0</button>
+                <button class="btn" onclick="appendToOutput('.')">.</button>
+                <button class="btn" onclick="evaluateOutput()">=</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function appendToOutput(value) {
+            document.getElementById('output').value += value;
+        }
+
+        function clearOutput() {
+            document.getElementById('output').value = '';
+        }
+
+        function deleteLastCharacter() {
+            var output = document.getElementById('output');
+            output.value = output.value.slice(0, -1);
+        }
+
+        function evaluateOutput() {
+            var output = document.getElementById('output');
+            try {
+                output.value = eval(output.value);
+            } catch (e) {
+                if (e instanceof SyntaxError) {
+                    alert('Invalid input');
+                }
+            }
+        }
+    </script>
+</body>
+</html>
